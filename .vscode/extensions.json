@@ -1,6 +1,6 @@
 {
     "recommendations": [
-        "ms-vscode.go",
-        "defaltd.go-coverage-viewer"
+        "golang.go",
+        "soren.go-coverage-viewer"
     ]
 }

@@ -1,9 +1,15 @@
-# OpenDiablo2 [![Build Status](https://travis-ci.org/OpenDiablo2/OpenDiablo2.svg?branch=master)](https://travis-ci.org/OpenDiablo2/OpenDiablo2)
-
-[Join us on Discord!](https://discord.gg/pRy8tdc)\
-[Development Live stream](https://www.twitch.tv/essial/)
+# OpenDiablo2
+[![CircleCI](https://circleci.com/gh/OpenDiablo2/OpenDiablo2/tree/master.svg?style=svg)](https://circleci.com/gh/OpenDiablo2/OpenDiablo2/tree/master)
 
 ![Logo](d2logo.png)
+
+[Join us on Discord!](https://discord.gg/pRy8tdc)\
+[Development Live stream](https://www.twitch.tv/essial/)\
+[Support us on Patreon](https://www.patreon.com/bePatron?u=37261055)
+
+We are also working on a toolset:\
+[https://github.com/OpenDiablo2/HellSpawner](https://github.com/OpenDiablo2/HellSpawner)\
+Please consider helping out with this project as well!
 
 ## About this project
 
@@ -16,6 +22,15 @@ Please note that **this game is neither developed by, nor endorsed by Blizzard o
 Diablo 2 and its content is ©2000 Blizzard Entertainment, Inc. All rights reserved. Diablo and Blizzard Entertainment are trademarks or registered trademarks of Blizzard Entertainment, Inc. in the U.S. and/or other countries.
 
 ALL OTHER TRADEMARKS ARE THE PROPERTY OF THEIR RESPECTIVE OWNERS.
+
+## Status
+
+At the moment (december 2020) the game starts, you can select any character and run around Act1 town.
+You can also open any of the game's panels.
+
+Much work has been made in the background, but a lot of work still has to be done for the game to be playable.
+
+Feel free to contribute!
 
 ## Building
 
@@ -32,7 +47,7 @@ You can also open the root folder in VSCode. Make sure you have the `ms-vscode.g
 ### Linux
 
 There are several dependencies which need to be installed additionally.
-To install them you can use `run.sh` in the project root folder - this script takes care of the installation for you.
+To install them you can use `./build.sh` in the project root folder - this script takes care of the installation for you.
 
 ## Contributing
 
@@ -45,10 +60,15 @@ replace github.com/OpenDiablo2/OpenDiablo2 => /your/forked/import/path
 
 This will tell go to use your local path instead of the official repo. Be sure to exclude this change from your pull requests!
 
-If you find something you'd like to fix thats obviously broken, create a branch, commit your code, and submit a pull request. If it's a new or missing feature you'd like to see, add an issue, and be descriptive!
+If you find something you'd like to fix that's obviously broken, create a branch, commit your code, and submit a pull request. If it's a new or missing feature you'd like to see, add an issue, and be descriptive!
 
 If you'd like to help out and are not quite sure how, you can look through any open issues and tasks, or ask
 for tasks on our discord server.
+
+**As of Oct. 26, 2020 we will no longer be accepting pull requests that introduce lint errors.**
+
+We use `golangci-lint` to catch lint errors, and we require all contributors to install and use
+ it. Installation instructions can be found [here](https://golangci-lint.run/usage/install/).
 
 ## VS Code Extensions
 
@@ -68,11 +88,48 @@ The engine is configured via the `config.json` file. By default, the configurati
 expansion via the official Blizzard Diablo2 installers using the default file paths. If you are not on Windows, or have installed
 the game in a different location, the base path may have to be adjusted.
 
+## Profiling
+
+There are many profiler options to debug performance issues. These can be enabled by suppling the following command-line option and are saved in the `pprof` directory:
+
+`go run . --profile=cpu`
+
+Available profilers:\
+`cpu` `mem` `block` `goroutine` `trace` `thread` `mutex`
+
+You can export the profiler output with the following command:\
+`go tool pprof --pdf ./OpenDiablo2 pprof/profiler.pprof > file.pdf`
+
+Ingame you can create a heap dump by pressing `~` and typing `dumpheap`. A heap.pprof is written to the `pprof` directory.
+
+You may need to install [Graphviz](http://www.graphviz.org/download/) in order to convert the profiler output.
+
+## Debugging
+
+### Layouts
+
+Layouts can show their boundaries and other visual debugging information when they render. Set `layoutDebug` to `true` in `d2core/d2gui/layout.go` to enable this behavior.
+
+![Example layout in debug mode](https://user-images.githubusercontent.com/1004323/85792085-31816480-b733-11ea-867e-291946bfff83.png)
+
+## Roadmap
+
+There is an in-progress [project roadmap](https://docs.google.com/document/d/156sWiuk-XBfomVxZ3MD-ijxnwM1X66KTHo2AcWIy8bE/edit?usp=sharing),
+which will be updated over time with new requirements.
+
 ## Screenshots
 
 ![Main Menu](docs/MainMenuSS.png)
 
 ![Select Hero](docs/SelectHeroSS.png)
+
+![Select Hero](docs/areas.gif)
+
+![Gameplay](docs/Gameplay.png)
+
+![Inventory Window](docs/Inventory.png)
+
+![Game Panels](docs/game_panels.png)
 
 ## Additional Credits
 
